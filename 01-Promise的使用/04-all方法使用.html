@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //一次需求需要两次请求才能完成 
+        /* let isResult1 = false
+        let isResult2 = false
+        //请求一
+        $ajax ({
+            url: '',
+            success: function() {
+                console.log("结果1");
+                isResult1 = true
+                handleResult()
+            }
+        })
+        //请求二
+        $ajax ({
+            url: '',
+            success: function() {
+                console.log("结果2");
+                isResult2 = true
+                handleResult()
+            }
+        })
+
+        function handleResult() {
+            if(isResult1&&isResult2){
+                console.log("需求成功");
+            }
+        } */
+
+        //改进方法:使用all方法 没有失败时可以不传reject参数
+        Promise.all([
+            new Promise((resolve) =>{
+                setTimeout(() =>{
+                    resolve('result1')
+                },3000)
+            }),
+            new Promise((resolve) =>{
+                setTimeout(() =>{
+                    resolve('result2')
+                },1000)
+            })
+        ]).then(results =>{
+            console.log("results");
+        })
+        
+    </script>
+</body>
+</html>

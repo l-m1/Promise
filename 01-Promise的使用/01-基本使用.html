@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 下面这就是调用地狱 在一个函数中不停的进行调用 */
+        /* setTimeout(() =>{
+            console.log("输出1");
+            setTimeout(() =>{
+                console.log("输出2");
+                setTimeout(() =>{
+                    console.log("输出3");
+                    setTimeout(() =>{
+                        console.log("输出4");
+                    },1000)
+                },1000)
+            },1000)
+        },1000) */
+
+        //解决调用地狱 使用Promise
+        new Promise((resolve,reject) =>{
+            setTimeout(() => {
+                resolve()
+            },1000)
+        }).then(() =>{
+            console.log("输出1");
+            return new Promise((resolve,reject) =>{
+                setTimeout(() =>{
+                    resolve()
+                },1000)
+            })
+        }).then(() =>{
+            console.log("输出2");
+            return new Promise((resolve,reject) =>{
+                setTimeout(() =>{
+                    resolve()
+                },1000)
+            })
+        }).then(() =>{
+            console.log("输出3");
+        })
+    </script>
+</body>
+</html>
